@@ -3,3 +3,4 @@
 export(bib2yaml)
 export(cleanRefs)
 export(getRefs)
+import(yaml, rcrosseref, rjson)
