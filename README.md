@@ -43,7 +43,7 @@ ls("package:refR")
 help(package = "refR")
 
 # Open the help file of a specific function
-help(refR::getRefs)
+help(getRefs)
 
 # Open the vignette (coming soon)
 # browseVignettes(package = "refR")
