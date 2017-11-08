@@ -51,8 +51,57 @@ help(getRefs)
 
 # Usage and workflow
 
-Coming soon...
+```r
+# Working directory
+setwd("~/Desktop")
 
+# Create a folder to store references
+path <- "references/"
+dir.create(path, showWarnings = FALSE)
+
+# Scopus Search API Key (get freely your own)
+api_key   <- "9zz9z999zz99z9999zz999zz999zz999"
+
+# Author Scopus ID
+author_id <- "99999999999"
+
+# Retrieve references from Scopus and Crossref
+refs <- refR::getRefs(
+  api_key   = api_key,
+  author_id = author_id,
+  date      = NULL,
+  sort      = "pubyear",
+  sleep     = 5,
+  folder    = path,
+  format    = c("bibtex", "yaml"),
+  erase     = FALSE
+)
+
+# Print the first reference (BibTeX) in memory
+cat(refs[[1]])
+
+# List all exported YAMLs
+yamls <- list.files(
+  path    = path,
+  pattern = "\\.yml$",
+  full.names = TRUE
+)
+
+# Import the first YAML
+(ref <- yaml.load_file(yamls[1]))
+
+# Clean all YAML references
+refR::cleanRefs(files = yamls)
+
+# Re-import the first YAML (cleaned)
+(ref <- yaml.load_file(yamls[1]))
+
+# Make bibliography
+# Coming soon...
+
+# See also:
+?bib2yaml
+```
 
 # To do list
 
