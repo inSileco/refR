@@ -51,7 +51,7 @@ help(getRefs)
 
 # Usage and workflow
 
-```r
+```
 # Working directory
 setwd("~/Desktop")
 
