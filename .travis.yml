@@ -1,0 +1,20 @@
+language: r
+warnings_are_errors: false
+sudo: required
+
+notifications:
+  slack:
+    rooms: insileco:3OxNTMMQsOZubgPEXCrXEwx7
+    on_success: always
+    on_failure: always
+    template:
+      - "%{repository} (%{commit}) : %{message} %{foo} "
+      - "%{build_url}"
+  email:
+    recipients:
+      - nicolas.casajus@gmail.com
+
+r_packages:
+  - yaml
+  - rjson
+  - rcrossref

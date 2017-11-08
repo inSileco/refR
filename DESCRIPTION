@@ -1,0 +1,27 @@
+Package: refR
+Title: An R package to get and manage BibTeX/YAML/JSON references
+Version: 1.0
+Date: 2017-11-08
+Authors@R: c(
+    person("Nicolas", "Casajus", email = "nicolas.casajus@gmail.com", role = c("aut", "cre")))
+Description:
+    The package \textbf{refR} retrieves author references from Scopus Search and
+    Crossref APIs and returns references as BibTeX files (function \code{\link[refR]{getRefs}}).
+    It also allows to convert BibTeX files in more readable formats (i.e. YAML and JSON) by
+    calling the software pandoc-citeproc (functions \code{\link[refR]{getRefs}} and
+    \code{\link[refR]{bib2yaml}}). Informations in references files can be cleaned
+    using the function \code{\link[refR]{cleanRefs}}. This function translates special
+    characters (accented characters and other LaTeX tags) and also cleans author names
+    (detection of particle in family names, removal of uppercase except for each first
+    letter of family and given names, and shorten given name).
+URL: https://github.com/inSileco/refR
+Depends: R (>= 3.4.0)
+License: GPL-3
+SystemRequirements: Pandoc and pandoc-citeproc
+Encoding: UTF-8
+LazyData: true
+Imports: yaml, rjson, rcrossref
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+NeedsCompilation: no
