@@ -6,7 +6,7 @@ The package **refR** retrieves author references from Scopus Search and Crossref
 
 # System requirements
 
-The **refR** package works well on both Unix and Windows platforms. This only requirement is that user has installed the wonderful software [**Pandoc**](https://pandoc.org/), the swiss-army knife of the documents formats conversion. Do not forget to also install **pandoc-citeproc**.
+The **refR** package works well on both Unix and Windows platforms. This only requirement is that user has to install the wonderful software [**Pandoc**](https://pandoc.org/), the swiss-army knife of the documents formats conversion. Do not forget to also install **pandoc-citeproc**.
 
 # Installation
 
@@ -82,8 +82,8 @@ cat(refs[[1]])
 
 # List all exported YAMLs
 yamls <- list.files(
-  path    = path,
-  pattern = "\\.yml$",
+  path       = path,
+  pattern    = "\\.yml$",
   full.names = TRUE
 )
 
@@ -99,7 +99,7 @@ refR::cleanRefs(files = yamls)
 # Make bibliography
 # Coming soon...
 
-# See also:
+# See also
 ?bib2yaml
 ```
 
