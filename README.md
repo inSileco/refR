@@ -3,16 +3,19 @@ refR <img src="refR-sticker.png" height="120" align="right"/>
 
 [![Build Status](https://travis-ci.org/inSileco/refR.svg?branch=master)](https://travis-ci.org/inSileco/refR) [![](https://img.shields.io/badge/licence-GPLv3-8f10cb.svg)](http://www.gnu.org/licenses/gpl.html)
 
-# Overview
+Overview
+--------
 
 The package **refR** retrieves author references from Scopus Search and Crossref APIs and returns references as BibTeX files (function `getRefs()`). It also allows to convert BibTeX files in more readable formats (i.e. YAML and JSON) by calling the software pandoc-citeproc (functions `getRefs()`, `bib2yaml()` and `bib2json()`). Informations in references files can be cleaned using the function `cleanRefs()`. This function translates special characters (accented characters and other LaTeX tags) and also cleans author names (detection of particle in family names, removal of uppercase except for each first letter of family and given names, and shorten given name).
 
 
-# System requirements
+System requirements
+--------
 
 The **refR** package works well on both Unix and Windows platforms. This only requirement is that user has to install the wonderful software [**Pandoc**](https://pandoc.org/), the swiss-army knife of the documents formats conversion. Do not forget to also install **pandoc-citeproc**.
 
-# Installation
+Installation
+--------
 
 To install the package **refR** from GitHub, first install the package [**devtools**](http://cran.r-project.org/web/packages/devtools/index.html) from the CRAN.
 
@@ -34,7 +37,8 @@ devtools::install_github("inSileco/refR", build_vignettes = TRUE)
 library(refR)
 ```
 
-# Getting started
+Getting started
+--------
 
 Some useful command lines to get started:
 
@@ -52,7 +56,8 @@ help(getRefs)
 # browseVignettes(package = "refR")
 ```
 
-# Usage and workflow
+Usage and workflow
+--------
 
 ```r
 # Working directory
@@ -106,7 +111,8 @@ refR::cleanRefs(files = yamls)
 ?bib2yaml
 ```
 
-# To do list
+To do list
+--------
 
 -   \[ \] Add _JSON_ and _BibTeX_ formats in `cleanRefs()`
 -   \[ \] Add a function `bib2json()`
