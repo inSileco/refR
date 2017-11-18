@@ -1,8 +1,8 @@
-#' @title Remove LaTeX tags and shorten authors names in YAML references
+#' @title Clean references.
 #'
-#' @description
+#' @description Remove LaTeX tags and shorten authors names in YAML references
 #'
-#' @param file Filename(s) of references in the YAML format to be cleaned
+#' @param files Filename(s) of references in the YAML format to be cleaned
 #'
 #' @export
 #'
@@ -26,9 +26,11 @@
 #' @examples
 #' # Coming soon...
 
-cleanRefs <- function (files) {
+cleanRefs <- function(files) {
 
+    owarn <- options()$warn
     options(warn = -1)
+    on.exit(options(warn = owarn))
 
     if (missing(files)) {
         stop("Please provides at least one filename (BiBTeX or YAML).")
@@ -44,8 +46,7 @@ cleanRefs <- function (files) {
         ref <- try(readLines(files[i]), silent = TRUE)
         if (class(ref) == "try-error") {
             stop(paste0("Unable to find/read ", files[i]))
-        }
-        else {
+        } else {
             cat(paste0("\r   [] Cleaned citations - ", i))
             pos <- grep("^  title:", ref)
             if (length(pos) == 0) {
@@ -55,35 +56,26 @@ cleanRefs <- function (files) {
                 ref)
             if (length(pos) > 0) {
                 for (j in 1:length(pos)) {
-                  ref[pos[j]] <- gsub("\\\\textparagraph", "ö",
-                    ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\textcopyright", "é",
-                    ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\guillemotleft", "ë",
-                    ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\cyrchar\\\\cyryo",
-                    "ë", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\textparagraph", "ö", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\textcopyright", "é", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\guillemotleft", "ë", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\cyrchar\\\\cyryo", "ë", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\dh", "d", ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\textquotesingle",
-                    "'", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\textquotesingle", "'", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\\\^", "-", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\TH", "TH", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\th", "th", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\\\[", "(", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\\\]", ")", ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\textdagger|Ã", "",
-                    ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\textasciiacute", "",
-                    ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\(.)\\{([[:alpha:]])\\}",
-                    "\\2", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\textdagger|Ã", "", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\textasciiacute", "", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\(.)\\{([[:alpha:]])\\}", "\\2", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\_", " ", ref[pos[j]])
                 }
             }
             pos1 <- grep("^  author:", ref)
             if (length(pos1) > 0) {
-                pos2 <- grep("^  [[:alpha:]]{1,}:|^\\.\\.\\.",
-                  ref)
+                pos2 <- grep("^  [[:alpha:]]{1,}:|^\\.\\.\\.", ref)
                 pos2 <- pos2[which(pos2 > pos1)][1]
                 au <- ref[(pos1 + 1):(pos2 - 1)]
                 family <- grep("family:", au)
@@ -94,27 +86,21 @@ cleanRefs <- function (files) {
                   if (length(grep("given:", item)) == 1) {
                     au_giv <- au[family[j] + 1]
                     item <- au[family[j] + 2]
-                    if (length(grep("dropping-particle:", item)) ==
-                      1) {
+                    if (length(grep("dropping-particle:", item)) == 1) {
                       au_drp <- au[family[j] + 2]
-                    }
-                    else {
+                    } else {
                       au_drp <- ""
                     }
-                  }
-                  else {
-                    if (length(grep("dropping-particle:", item)) ==
-                      1) {
+                  } else {
+                    if (length(grep("dropping-particle:", item)) == 1) {
                       au_giv <- au[family[j] + 1]
                       au_drp <- ""
-                    }
-                    else {
+                    } else {
                       au_giv <- ""
                       au_drp <- ""
                     }
                   }
-                  authors[j] <- paste0(c(au_giv, au_drp, au_fam),
-                    collapse = " ")
+                  authors[j] <- paste0(c(au_giv, au_drp, au_fam), collapse = " ")
                   authors[j] <- gsub("  - family: |    given: |    dropping-particle: ",
                     "", authors[j])
                   authors[j] <- gsub("^ ", "", authors[j])
@@ -139,21 +125,20 @@ cleanRefs <- function (files) {
                     subs <- strsplit(family, "-")[[1]]
                     family <- NULL
                     for (k in 1:length(subs)) {
-                      family <- c(family, paste0(toupper(substr(subs[k],
-                        1, 1)), tolower(substr(subs[k], 2, nchar(subs[k])))))
+                      family <- c(family, paste0(toupper(substr(subs[k], 1, 1)),
+                        tolower(substr(subs[k], 2, nchar(subs[k])))))
                     }
                     family <- paste0(family, collapse = "-")
-                  }
-                  else {
-                    family <- paste0(toupper(substr(family, 1,
-                      1)), tolower(substr(family, 2, nchar(family))))
+                  } else {
+                    family <- paste0(toupper(substr(family, 1, 1)), tolower(substr(family,
+                      2, nchar(family))))
                   }
                   if (length(grep("'", family)) > 0) {
                     yyy <- strsplit(family, "'")[[1]]
                     family <- yyy[1]
                     for (k in 2:length(yyy)) {
-                      family <- c(family, paste0(toupper(substr(yyy[k],
-                        1, 1)), substr(yyy[k], 2, nchar(yyy[k]))))
+                      family <- c(family, paste0(toupper(substr(yyy[k], 1, 1)), substr(yyy[k],
+                        2, nchar(yyy[k]))))
                     }
                     family <- paste0(family, collapse = "'")
                   }
@@ -161,18 +146,16 @@ cleanRefs <- function (files) {
                     yyy <- strsplit(family, "Mc")[[1]]
                     family <- yyy[1]
                     for (k in 2:length(yyy)) {
-                      family <- c(family, paste0(toupper(substr(yyy[k],
-                        1, 1)), substr(yyy[k], 2, nchar(yyy[k]))))
+                      family <- c(family, paste0(toupper(substr(yyy[k], 1, 1)), substr(yyy[k],
+                        2, nchar(yyy[k]))))
                     }
                     family <- paste0(family, collapse = "Mc")
                   }
-                  particles <- c("de", "d'", "du", "des", "of",
-                    "da", "dall'", "degli", "dei", "del", "dell'",
-                    "della", "lo", "san", "am", "an", "auf",
-                    "aus", "der", "im", "von", "und", "zu", "zum",
-                    "zur", "del", "los", "las", "den", "ten",
-                    "ter", "te", "van", "vanden", "vander", "das",
-                    "do", "dos", "af", "av")
+                  particles <- c("de", "d'", "du", "des", "of", "da", "dall'", "degli",
+                    "dei", "del", "dell'", "della", "lo", "san", "am", "an", "auf",
+                    "aus", "der", "im", "von", "und", "zu", "zum", "zur", "del",
+                    "los", "las", "den", "ten", "ter", "te", "van", "vanden", "vander",
+                    "das", "do", "dos", "af", "av")
                   pos <- which(tolower(xxx) %in% particles)
                   if (length(pos) > 0) {
                     part <- NULL
@@ -180,8 +163,7 @@ cleanRefs <- function (files) {
                       part <- c(part, tolower(xxx[pos[k]]))
                     }
                     drp <- paste0(part, collapse = " ")
-                  }
-                  else {
+                  } else {
                     drp <- ""
                   }
                   xxx <- xxx[-c(pos, length(xxx))]
@@ -193,49 +175,33 @@ cleanRefs <- function (files) {
                         yyy <- strsplit(xxx[k], "-")[[1]]
                         zzz <- NULL
                         for (z in 1:length(yyy)) {
-                          if (!(toupper(substr(yyy[z], 1, 1)) %in%
-                            LETTERS)) {
-                            if ((toupper(substr(yyy[z], 2, 2)) %in%
-                              LETTERS)) {
-                              zzz <- c(zzz, toupper(substr(yyy[z],
-                                2, 2)), ".-")
+                          if (!(toupper(substr(yyy[z], 1, 1)) %in% LETTERS)) {
+                            if ((toupper(substr(yyy[z], 2, 2)) %in% LETTERS)) {
+                              zzz <- c(zzz, toupper(substr(yyy[z], 2, 2)), ".-")
+                            } else {
+                              zzz <- c(zzz, toupper(substr(yyy[z], 1, 1)), ".-")
                             }
-                            else {
-                              zzz <- c(zzz, toupper(substr(yyy[z],
-                                1, 1)), ".-")
-                            }
-                          }
-                          else {
-                            zzz <- c(zzz, toupper(substr(yyy[z],
-                              1, 1)), ".-")
+                          } else {
+                            zzz <- c(zzz, toupper(substr(yyy[z], 1, 1)), ".-")
                           }
                         }
                         zzz <- paste0(zzz, collapse = "")
                         given[k] <- gsub("-$", "", zzz)
-                      }
-                      else {
-                        if (!(toupper(substr(xxx[k], 1, 1)) %in%
-                          LETTERS)) {
-                          if ((toupper(substr(xxx[k], 2, 2)) %in%
-                            LETTERS)) {
-                            zzz <- c(toupper(substr(xxx[k], 2,
-                              2)), ".")
+                      } else {
+                        if (!(toupper(substr(xxx[k], 1, 1)) %in% LETTERS)) {
+                          if ((toupper(substr(xxx[k], 2, 2)) %in% LETTERS)) {
+                            zzz <- c(toupper(substr(xxx[k], 2, 2)), ".")
+                          } else {
+                            zzz <- c(toupper(substr(xxx[k], 1, 1)), ".")
                           }
-                          else {
-                            zzz <- c(toupper(substr(xxx[k], 1,
-                              1)), ".")
-                          }
-                        }
-                        else {
-                          zzz <- c(toupper(substr(xxx[k], 1,
-                            1)), ".")
+                        } else {
+                          zzz <- c(toupper(substr(xxx[k], 1, 1)), ".")
                         }
                         given[k] <- paste0(zzz, collapse = "")
                       }
                     }
                     given <- paste0(given, collapse = " ")
-                  }
-                  else {
+                  } else {
                     given <- ""
                   }
                   au_family[j] <- family
@@ -244,12 +210,9 @@ cleanRefs <- function (files) {
                 }
                 authors <- NULL
                 for (j in 1:length(au_family)) {
-                  authors <- c(authors, paste0("  - family: ",
-                    au_family[j]))
-                  authors <- c(authors, paste0("    given: ",
-                    au_given[j]))
-                  authors <- c(authors, paste0("    dropping-particle: ",
-                    au_drop[j]))
+                  authors <- c(authors, paste0("  - family: ", au_family[j]))
+                  authors <- c(authors, paste0("    given: ", au_given[j]))
+                  authors <- c(authors, paste0("    dropping-particle: ", au_drop[j]))
                 }
                 pos <- grep("^    dropping-particle: $", authors)
                 if (length(pos) > 0) {
@@ -263,20 +226,21 @@ cleanRefs <- function (files) {
                 ref <- paste0(c(ref, "\n"), collapse = "\n")
                 ref <- gsub("\\n\\n", "\n", ref)
                 cat(ref, file = files[i])
-            }
-            else {
+            } else {
                 missing_au <- c(missing_au, files[i])
             }
         }
     }
     if (length(missing_au) > 0) {
-        cat(paste0("\n\n   [] The following files do not contain authors:\n\t",
-            paste0(missing_au, collapse = "\n\t"), "\n"))
+        cat(paste0("\n\n   [] The following files do not contain authors:\n\t", paste0(missing_au,
+            collapse = "\n\t"), "\n"))
     }
     if (length(missing_ti) > 0) {
-        cat(paste0("\n[] The following files do not contain title:\n\t",
-            paste0(missing_ti, collapse = "\n\t"), "\n"))
+        cat(paste0("\n[] The following files do not contain title:\n\t", paste0(missing_ti,
+            collapse = "\n\t"), "\n"))
     }
     cat("\n-------------------------------------------------\n\n")
-    options(warn = 0)
+
+
+    invisible()
 }

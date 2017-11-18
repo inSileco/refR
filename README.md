@@ -18,7 +18,6 @@ install.packages("devtools", dependencies = TRUE)
 
 # Load the < devtools > package
 library(devtools)
-
 ```
 
 Then install the **refR** package:
@@ -59,7 +58,7 @@ setwd("~/Desktop")
 path <- "references/"
 dir.create(path, showWarnings = FALSE)
 
-# Scopus Search API Key (get freely your own)
+# Scopus Search API Key (get freely your own) https://blog.scopus.com/topics/api
 api_key   <- "9zz9z999zz99z9999zz999zz999zz999"
 
 # Author Scopus ID

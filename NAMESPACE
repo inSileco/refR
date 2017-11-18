@@ -2,5 +2,5 @@
 
 export(bib2yaml)
 export(cleanRefs)
+export(detectBin)
 export(getRefs)
-import(yaml, rcrossref, rjson)

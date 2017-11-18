@@ -2,15 +2,15 @@
 % Please edit documentation in R/cleanRefs.R
 \name{cleanRefs}
 \alias{cleanRefs}
-\title{Remove LaTeX tags and shorten authors names in YAML references}
+\title{Clean references.}
 \usage{
 cleanRefs(files)
 }
 \arguments{
-\item{file}{Filename(s) of references in the YAML format to be cleaned}
+\item{files}{Filename(s) of references in the YAML format to be cleaned}
 }
 \description{
-
+Remove LaTeX tags and shorten authors names in YAML references
 }
 \details{
 The conversion from BibTeX to YAML (using pandoc-citeproc called by
