@@ -1,3 +1,5 @@
+<img src="refR-sticker.png" height="120"/>
+
 # Overview
 
 The package **refR** retrieves author references from Scopus Search and Crossref APIs and returns references as BibTeX files (function `getRefs()`). It also allows to convert BibTeX files in more readable formats (i.e. YAML and JSON) by calling the software pandoc-citeproc (functions `getRefs()`, `bib2yaml()` and `bib2json()`). Informations in references files can be cleaned using the function `cleanRefs()`. This function translates special characters (accented characters and other LaTeX tags) and also cleans author names (detection of particle in family names, removal of uppercase except for each first letter of family and given names, and shorten given name).

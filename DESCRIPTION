@@ -3,7 +3,8 @@ Title: An R package to get and manage BibTeX/YAML/JSON references
 Version: 1.0
 Date: 2017-11-18
 Authors@R: c(
-    person("Nicolas", "Casajus", email = "nicolas.casajus@gmail.com", role = c("aut", "cre")))
+    person("Nicolas", "Casajus", email = "nicolas.casajus@gmail.com", role = c("aut", "cre")),
+    person("Kevin", "Cazelles", email = "kcazelle@uoguelph.ca", role = c("aut")))
 Description:
     The package \textbf{refR} retrieves author references from Scopus Search and
     Crossref APIs and returns references as BibTeX files (function \code{\link[refR]{getRefs}}).
