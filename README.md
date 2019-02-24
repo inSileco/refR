@@ -1,7 +1,9 @@
-refR <img src="refR-sticker.png" height="120" align="right"/>
-=========================================================
+refR <img src="man/figures/refR-sticker.png" height="120" align="right"/>
+=========================================================================
 
-[![Build Status](https://travis-ci.org/inSileco/refR.svg?branch=master)](https://travis-ci.org/inSileco/refR) [![](https://img.shields.io/badge/licence-GPLv3-8f10cb.svg)](http://www.gnu.org/licenses/gpl.html)
+[![Build Status](https://travis-ci.org/inSileco/refR.svg?branch=master)](https://travis-ci.org/inSileco/refR)
+[![Build status](https://ci.appveyor.com/api/projects/status/91l9qdaro5uvtak0?svg=true)](https://ci.appveyor.com/project/KevCaz/refr)
+
 
 Overview
 --------
@@ -118,4 +120,3 @@ To do list
 -   \[ \] Add a function `makeBiblio()`
 -   \[ \] Make a connexion with [**rscimap**](https://github.com/ahasverus/rscimap)
 -   \[ \] Write a vignette with a complete working example
--   \[ \] Write a post (redundant with the vignette?)

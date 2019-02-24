@@ -14,7 +14,7 @@
 #' @param sleep A positive numeric indicating the time interval (in seconds) between two consecutive Scopus queries (a Scopus query response is limited to 25 entries)
 #' @param folder A string indicating the folder (relative or absolute path) to write references
 #' @param format A string indicating the references format (the possible formats are \code{bibtex}, \code{yaml} and \code{json})
-#' @param erase A boolean specifing if a reference that already exists in the folder must be rewritten (\code{TRUE}) or not (\code{FALSE})
+#' @param erase A boolean specifying if a reference that already exists in the folder must be rewritten (\code{TRUE}) or not (\code{FALSE})
 #'
 #' @export
 #'
@@ -227,8 +227,7 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
 
         ### If at least one DOI
 
-        if (length(items) > 0) {
-
+        if (length(items) ) {
 
             w <- 1
             refs <- NULL
@@ -378,9 +377,7 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
                 }
             }
 
-
-            cat("\n")
-            cat(paste0("\n   [] Exporting citations in ", paste0(toupper(format),
+            cat(paste0("\n\n   [] Exporting citations in ", paste0(toupper(format),
                 collapse = ", ")))
             cat("\n")
 
@@ -444,12 +441,9 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
 
     } else {
 
-
         cat(paste0("   [] Scopus API   - No items found"))
-        cat("\n")
-        cat(paste0("      Exit..."))
-        cat("\n")
-        cat("\n------------------------------------------------\n\n")
+        cat(paste0("\n      Exit..."))
+        cat("\n\n------------------------------------------------\n\n")
     }
 
 
