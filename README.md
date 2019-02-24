@@ -6,16 +6,16 @@ refR <img src="refR-sticker.png" height="120" align="right"/>
 Overview
 --------
 
-The package **refR** retrieves author references from Scopus Search and Crossref APIs and returns references as BibTeX files (function `getRefs()`). It also allows to convert BibTeX files in more readable formats (i.e. YAML and JSON) by calling the software pandoc-citeproc (functions `getRefs()`, `bib2yaml()` and `bib2json()`). Informations in references files can be cleaned using the function `cleanRefs()`. This function translates special characters (accented characters and other LaTeX tags) and also cleans author names (detection of particle in family names, removal of uppercase except for each first letter of family and given names, and shorten given name).
+The package **refR** retrieves author references from [Scopus Search](https://dev.elsevier.com/api_key_settings.html) and [Crossref](https://www.crossref.org/services/metadata-delivery/rest-api/) APIs and returns references as BibTeX files (function `getRefs()`). It also allows to convert BibTeX files in more readable formats (i.e. YAML and JSON) by calling the software pandoc-citeproc (functions `getRefs()`, `bib2yaml()` and `bib2json()`). Informations in references files can be cleaned using the function `cleanRefs()`. This function translates special characters (accented characters and other LaTeX tags) and also cleans author names (detection of particle in family names, removal of uppercase except for each first letter of family and given names, and shorten given name).
 
 
 System requirements
---------
+-------------------
 
-The **refR** package works well on both Unix and Windows platforms. This only requirement is that user has to install the wonderful software [**Pandoc**](https://pandoc.org/), the swiss-army knife of the documents formats conversion. Do not forget to also install **pandoc-citeproc**.
+The **refR** package works well on both Unix and Windows platforms. This only requirement is that user has to install the wonderful software [**Pandoc**](https://pandoc.org/), the swiss-army knife of the documents formats conversion. Do not forget to also install [pandoc-citeproc](https://github.com/jgm/pandoc-citeproc).
 
 Installation
---------
+------------
 
 To install the package **refR** from GitHub, first install the package [**devtools**](http://cran.r-project.org/web/packages/devtools/index.html) from the CRAN.
 
@@ -57,12 +57,9 @@ help(getRefs)
 ```
 
 Usage and workflow
---------
+-----------------
 
 ```r
-# Working directory
-setwd("~/Desktop")
-
 # Create a folder to store references
 path <- "references/"
 dir.create(path, showWarnings = FALSE)

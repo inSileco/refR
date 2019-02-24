@@ -166,5 +166,5 @@ bib2yaml <- function(data = NULL, file = NULL, path = ".", write = TRUE) {
     cat(paste0("\n>>> ", k, " BiBTeX files have successfully been converted in YAML.\n\n"))
 
     options(warn = 0)
-    return(data2)
+    data2
 }
