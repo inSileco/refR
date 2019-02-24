@@ -10,14 +10,14 @@ init:
 install:
   ps: Bootstrap
 
-environment:
-  USE_RTOOLS: true
-
+before_build:
+    - choco install pandoc
+# Adapt as necessary starting from here
 build_script:
   - travis-tool.sh install_deps
 
-after_build:
-  - choco install pandoc
+test_script:
+  - travis-tool.sh run_tests
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*

@@ -34,11 +34,9 @@ bib2yaml <- function(data = NULL, file = NULL, path = ".", write = TRUE) {
         stop("refR requires the installation of pandoc-citeproc.")
 
 
-
     if ((!is.null(data) && !is.null(file)) || (is.null(data) && is.null(file))) {
         stop("Please use data **OR** file.")
     }
-
 
     k <- 0
 
