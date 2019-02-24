@@ -17,7 +17,7 @@ build_script:
   - travis-tool.sh install_deps
 
 after_build:
-  - choco install pandoc pandc-citeproc
+  - choco install pandoc
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*
