@@ -34,11 +34,9 @@ bib2yaml <- function(data = NULL, file = NULL, path = ".", write = TRUE) {
         stop("refR requires the installation of pandoc-citeproc.")
 
 
-
     if ((!is.null(data) && !is.null(file)) || (is.null(data) && is.null(file))) {
         stop("Please use data **OR** file.")
     }
-
 
     k <- 0
 
@@ -166,5 +164,5 @@ bib2yaml <- function(data = NULL, file = NULL, path = ".", write = TRUE) {
     cat(paste0("\n>>> ", k, " BiBTeX files have successfully been converted in YAML.\n\n"))
 
     options(warn = 0)
-    return(data2)
+    data2
 }

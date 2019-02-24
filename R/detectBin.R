@@ -10,7 +10,7 @@
 #' The path to the command binary.
 #'
 #' @examples
-#' detectBin('cd')
+#' detectBin('pandoc')
 
 
 detectBin <- function(bin) {

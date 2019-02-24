@@ -4,8 +4,9 @@
 \alias{getRefs}
 \title{Retrieve author references from Scopus and Crossref APIs}
 \usage{
-getRefs(api_key = NULL, author_id = NULL, date = NULL, sort = "pubyear",
-  sleep = 5, folder = ".", format = c("bibtex", "yaml"), erase = FALSE)
+getRefs(api_key = NULL, author_id = NULL, date = NULL,
+  sort = "pubyear", sleep = 5, folder = ".", format = c("bibtex",
+  "yaml"), erase = FALSE)
 }
 \arguments{
 \item{api_key}{A string indicating the user Scopus API Key obtained from the Elsevier Developer Portal}
