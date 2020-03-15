@@ -2,7 +2,7 @@
 #'
 #' @description This function converts one (or many) BibTeX into YAML format using the software pandoc and pandoc-citeproc (called with the R function\code{system()}).
 #'
-#' @param data A vector of collapsed BibTeX [strings] (i.e. each element of the vector/list is one single BibTeX)
+#' @param data A vector of collapsed BibTeX strings (i.e. each element of the vector/list is one single BibTeX)
 #' @param file A vector of BibTeX files to be converted
 #' @param path The path to the directory where YAML files will be written (ignored if \code{write = FALSE})
 #' @param write A boolean indicating if YAML will be written
@@ -34,9 +34,9 @@ bib2yaml <- function(data = NULL, file = NULL, path = ".", write = TRUE) {
         stop("refR requires the installation of pandoc-citeproc.")
 
 
-    if ((!is.null(data) && !is.null(file)) || (is.null(data) && is.null(file))) {
+    if ((!is.null(data) && !is.null(file)) || (is.null(data) && is.null(file)))
         stop("Please use data **OR** file.")
-    }
+
 
     k <- 0
 
@@ -61,7 +61,7 @@ bib2yaml <- function(data = NULL, file = NULL, path = ".", write = TRUE) {
             data2 <- list()
         }
 
-        for (i in 1:length(data)) {
+        for (i in seq_along(data)) {
 
             if (length(grep("^@[[:alpha:]]{1,}\\{", data[i])) > 0) {
 
@@ -116,7 +116,7 @@ bib2yaml <- function(data = NULL, file = NULL, path = ".", write = TRUE) {
             data2 <- list()
         }
 
-        for (i in 1:length(file)) {
+        for (i in seq_along(file)) {
 
             file[i] <- gsub("\\.bib", "", file[i], ignore.case = TRUE)
 

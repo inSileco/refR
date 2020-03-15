@@ -3,4 +3,6 @@
 export(bib2yaml)
 export(cleanRefs)
 export(detectBin)
+export(extractBib)
+export(findRef)
 export(getRefs)

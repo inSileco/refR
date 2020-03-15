@@ -23,12 +23,9 @@ detectBin <- function(bin) {
 
     if (grepl("linux|apple", tolower(R.version$os))) {
         out <- system2(command = "which", args = bin, stdout = TRUE, stderr = TRUE)
-    } else {
-        out <- system(paste0("where ", bin), show.output.on.console = FALSE)
-    }
+    } else out <- system(paste0("where ", bin), show.output.on.console = FALSE)
 
-    if (!length(out))
-        out <- NA_character_
+    if (!length(out)) out <- NA_character_
 
     out
 }

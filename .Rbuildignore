@@ -1,6 +1,7 @@
 ^\.travis\.yml$
-^\.appveyor\.yml$
+^appveyor\.yml$
 ^\.gitignore
 ^README\.md
 Makefile
 LICENSE
+^News\.md

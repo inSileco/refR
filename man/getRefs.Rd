@@ -4,9 +4,16 @@
 \alias{getRefs}
 \title{Retrieve author references from Scopus and Crossref APIs}
 \usage{
-getRefs(api_key = NULL, author_id = NULL, date = NULL,
-  sort = "pubyear", sleep = 5, folder = ".", format = c("bibtex",
-  "yaml"), erase = FALSE)
+getRefs(
+  api_key = NULL,
+  author_id = NULL,
+  date = NULL,
+  sort = "pubyear",
+  sleep = 5,
+  folder = ".",
+  format = c("bibtex", "yaml"),
+  erase = FALSE
+)
 }
 \arguments{
 \item{api_key}{A string indicating the user Scopus API Key obtained from the Elsevier Developer Portal}
@@ -23,7 +30,7 @@ getRefs(api_key = NULL, author_id = NULL, date = NULL,
 
 \item{format}{A string indicating the references format (the possible formats are \code{bibtex}, \code{yaml} and \code{json})}
 
-\item{erase}{A boolean specifing if a reference that already exists in the folder must be rewritten (\code{TRUE}) or not (\code{FALSE})}
+\item{erase}{A boolean specifying if a reference that already exists in the folder must be rewritten (\code{TRUE}) or not (\code{FALSE})}
 }
 \value{
 A list of BibTeX strings. BibTeX (if required) and other specified formats are also written in the directory specified by the argument \code{folder}.
@@ -39,13 +46,15 @@ The conversion is proceeded using pandoc and pandoc-citeproc (must be separately
 Before using this function user has to get a free Scopus API Key from the Elsevier Developer Portal (\url{https://dev.elsevier.com/user/registration}).
 He also needs to know the author Scopus identifer by visiting the Scopus Author Search Portal (\url{https://www.scopus.com/freelookup/form/author.uri}).
 This function works in four steps:
-1) Get a list of references from Scopus API and keep only those with a DOI (all fields are returned except the authors list);
-2) Complete the metadata (mainly the authors list) using the Crossref API called by the function \code{\link[rcrossref]{cr_cn}} (request by DOI);
-3) Merge metadata from the two sources and keep the best (hopefully);
-4) Write references (one file per reference) in the specified formats using pandoc-citeproc (for YAML and JSON).
+\enumerate{
+\item Get a list of references from Scopus API and keep only those with a DOI (all fields are returned except the authors list);
+\item Complete the metadata (mainly the authors list) using the Crossref API called by the function \code{\link[rcrossref]{cr_cn}} (request by DOI);
+\item Merge metadata from the two sources and keep the best (hopefully);
+\item Write references (one file per reference) in the specified formats using pandoc-citeproc (for YAML and JSON).
 We strongly recommend to convert references in YAML (and also keep BibTeX formats)
 because this step (performed with pandoc-citeproc) translates a large amount of LaTeX tags (mainly accented characters).
 But if you prefer you can also export references in BibTeX and then use the function \code{\link[refR]{bib2yaml}} to convert them in YAML.
+}
 }
 \examples{
 # Coming soon...
