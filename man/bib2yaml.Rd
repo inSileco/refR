@@ -7,7 +7,7 @@
 bib2yaml(data = NULL, file = NULL, path = ".", write = TRUE)
 }
 \arguments{
-\item{data}{A vector of collapsed BibTeX [strings] (i.e. each element of the vector/list is one single BibTeX)}
+\item{data}{A vector of collapsed BibTeX strings (i.e. each element of the vector/list is one single BibTeX)}
 
 \item{file}{A vector of BibTeX files to be converted}
 

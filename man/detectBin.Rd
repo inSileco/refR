@@ -16,5 +16,5 @@ The path to the command binary.
 \code{detectBin} detects and returns the path to a command binary.
 }
 \examples{
-detectBin('cd')
+detectBin('pandoc')
 }

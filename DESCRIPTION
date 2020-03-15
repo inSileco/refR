@@ -1,7 +1,7 @@
 Package: refR
 Title: An R package to get and manage BibTeX/YAML/JSON references
-Version: 1.0
-Date: 2017-11-18
+Version: 1.0.0.9000
+Date: 2020-03-14
 Authors@R: c(
     person("Nicolas", "Casajus", email = "nicolas.casajus@gmail.com", role = c("aut", "cre")),
     person("Kevin", "Cazelles", email = "kcazelle@uoguelph.ca", role = c("aut"), comment = c(ORCID = "0000-0001-6619-9874"))
@@ -22,8 +22,18 @@ Depends: R (>= 3.4.0)
 License: GPL-3
 SystemRequirements: Pandoc and pandoc-citeproc
 LazyData: true
-Imports: yaml, rjson, rcrossref
-Suggests: knitr, rmarkdown
+Imports:
+    stringr,
+    rjson,
+    rcrossref,
+    yaml
+Suggests:
+    knitr,
+    rmarkdown,
+    RefManageR,
+    testthat
+Encoding: UTF-8
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 NeedsCompilation: no
+Roxygen: list(markdown = TRUE)

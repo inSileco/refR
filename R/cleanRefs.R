@@ -42,7 +42,7 @@ cleanRefs <- function(files) {
     cat(paste0("\n       >>>     Cleaning YAML files     <<<       \n"))
     cat("\n-------------------------------------------------\n")
     cat("\n")
-    for (i in 1:length(files)) {
+    for (i in seq_along(files)) {
         ref <- try(readLines(files[i]), silent = TRUE)
         if (class(ref) == "try-error") {
             stop(paste0("Unable to find/read ", files[i]))
@@ -54,12 +54,12 @@ cleanRefs <- function(files) {
             }
             pos <- grep("family:|given:|dropping-particle:|title:|container-title:|volume:",
                 ref)
-            if (length(pos) > 0) {
-                for (j in 1:length(pos)) {
-                  ref[pos[j]] <- gsub("\\\\textparagraph", "ö", ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\textcopyright", "é", ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\guillemotleft", "ë", ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\cyrchar\\\\cyryo", "ë", ref[pos[j]])
+            if (length(pos)) {
+                for (j in seq_along(pos)) {
+                  ref[pos[j]] <- gsub("\\\\textparagraph", "\u00f6", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\textcopyright", "\u00e9", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\guillemotleft", "\u00eb", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\cyrchar\\\\cyryo", "\u00eb", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\dh", "d", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\textquotesingle", "'", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\\\^", "-", ref[pos[j]])
@@ -67,14 +67,15 @@ cleanRefs <- function(files) {
                   ref[pos[j]] <- gsub("\\\\th", "th", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\\\[", "(", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\\\]", ")", ref[pos[j]])
-                  ref[pos[j]] <- gsub("\\\\textdagger|Ã", "", ref[pos[j]])
+                  ref[pos[j]] <- gsub("\\\\textdagger|\u00c3", "", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\textasciiacute", "", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\(.)\\{([[:alpha:]])\\}", "\\2", ref[pos[j]])
                   ref[pos[j]] <- gsub("\\\\_", " ", ref[pos[j]])
                 }
             }
+
             pos1 <- grep("^  author:", ref)
-            if (length(pos1) > 0) {
+            if (length(pos1)) {
                 pos2 <- grep("^  [[:alpha:]]{1,}:|^\\.\\.\\.", ref)
                 pos2 <- pos2[which(pos2 > pos1)][1]
                 au <- ref[(pos1 + 1):(pos2 - 1)]
@@ -174,7 +175,7 @@ cleanRefs <- function(files) {
                       if (length(pos) > 0) {
                         yyy <- strsplit(xxx[k], "-")[[1]]
                         zzz <- NULL
-                        for (z in 1:length(yyy)) {
+                        for (z in seq_along(yyy)) {
                           if (!(toupper(substr(yyy[z], 1, 1)) %in% LETTERS)) {
                             if ((toupper(substr(yyy[z], 2, 2)) %in% LETTERS)) {
                               zzz <- c(zzz, toupper(substr(yyy[z], 2, 2)), ".-")

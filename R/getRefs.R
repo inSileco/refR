@@ -133,11 +133,9 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
 
         if (length(which(names(res[[1]]) == "entry")) > 0) {
 
-
             ### If Result set was empty
 
             if (length(which(names(res[[1]]$entry[[1]]) == "error")) > 0) {
-
 
                 ### Exit
 
@@ -148,10 +146,9 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
                 cat(paste0("\r   [] Scopus API   - ", (length(items) + length(res[[1]]$entry)),
                   " items found"))
 
-
                 ### Extract metadata
 
-                for (k in 1:length(res[[1]]$entry)) {
+                for (k in seq_along(res[[1]]$entry)) {
 
                   infos <- list()
 
@@ -232,7 +229,7 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
             w <- 1
             refs <- NULL
 
-            for (i in 1:length(items)) {
+            for (i in seq_along(items)) {
 
 
                 ### Get citation from CROSSREF
@@ -382,7 +379,7 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
             cat("\n")
 
 
-            for (i in 1:length(refs)) {
+            for (i in seq_along(refs)) {
 
 
                 ### Get filename (Article Scopus ID)
@@ -447,5 +444,5 @@ getRefs <- function(api_key = NULL, author_id = NULL, date = NULL, sort = "pubye
     }
 
 
-    return(refs)
+    refs
 }

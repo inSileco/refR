@@ -3,6 +3,7 @@ refR <img src="man/figures/refR-sticker.png" height="120" align="right"/>
 
 [![Build Status](https://travis-ci.org/inSileco/refR.svg?branch=master)](https://travis-ci.org/inSileco/refR)
 [![Build status](https://ci.appveyor.com/api/projects/status/91l9qdaro5uvtak0?svg=true)](https://ci.appveyor.com/project/KevCaz/refr)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
 
 Overview
@@ -110,6 +111,49 @@ refR::cleanRefs(files = yamls)
 ?bib2yaml
 ```
 
+
+
+Bibliography operations
+=======================
+
+Find reference and extract bibliography
+---------------------------------------
+
+```R
+R> findRef(text='First \\cite{Pimm2000}, second \\Citep{May1972}')
+       key freq
+1  May1972    1
+2 Pimm2000    1
+```
+
+```R
+R> findRef(text='First @Pimm2000, second @May1972, third [@May1972]', markdown=TRUE)
+       key freq
+1  May1972    1
+2 Pimm2000    1
+```
+
+
+```R
+R> file.name <- system.file('Bib', 'RJC.bib', package='RefManageR')
+R> bib <- RefManageR::ReadBib(file.name)
+R> txt <- 'First \\cite{kim1995estimating}, second \\Citep{fu2006statistical}'
+R> tfile <- tempfile(fileext = '.bib')
+R> extractBib(bib, txt)
+$keys
+[1] "fu2006statistical" "kim1995estimating"
+
+$refs
+[1] W. J. Fu, J. Hu, T. Spencer, et al. “Statistical models in assessing
+fold change of gene expression in real-time RT-PCR experiments”. In:
+_Computational biology and chemistry_ 30.1 (2006), pp. 21-26.
+
+[2] M. Y. Kim, B. S. Pasternack, R. J. Carroll, et al. “Estimating the
+reliability of an exposure variable in the presence of confounders”. In:
+_Statistics in medicine_ 14.13 (1995), pp. 1437-1446.
+```
+
+
 To do list
 --------
 
@@ -120,3 +164,8 @@ To do list
 -   \[ \] Add a function `makeBiblio()`
 -   \[ \] Make a connexion with [**rscimap**](https://github.com/ahasverus/rscimap)
 -   \[ \] Write a vignette with a complete working example
+
+
+
+
+
